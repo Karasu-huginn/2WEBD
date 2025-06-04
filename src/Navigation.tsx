@@ -1,0 +1,12 @@
+import { Link } from "react-router";
+
+export function Navigation() {
+    return (
+        <div style={{ display: "flex", flexFlow: "row nowrap", justifyContent: "space-around", gap: "1rem" }}>
+            <nav>
+                <Link to="/">Main </Link>
+                <Link to="/adv_search">Advanced Search</Link>
+            </nav>
+        </div>
+    )
+}
