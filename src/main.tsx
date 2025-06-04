@@ -6,6 +6,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router'
 import { AdvancedSearch } from './AdvancedSearch.tsx'
 import { ItemDetails } from './ItemDetails.tsx'
 import { Navigation } from './Navigation.tsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
   }
 ]);
 
+const query_client = new QueryClient();
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={query_client}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 )
