@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import './App.css'
-import { type ObjectIDListResponse } from './Search'
+import type { ObjectIDListResponse } from './Search'
 import { HighlightedItem } from './HighlightedItem';
 
 function App() {
