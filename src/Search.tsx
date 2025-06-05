@@ -3,7 +3,7 @@ import { SearchObjectResult } from './SearchObjectResult';
 import { useSearchParams } from "react-router";
 
 
-interface ObjectIDListResponse {
+export interface ObjectIDListResponse {
     previousOffset: number | null;
     nextOffset: number | null;
     objectIDs: number[];
@@ -16,7 +16,7 @@ export function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const search = searchParams.get("search") || "";
     const { isPending, error, data } = useQuery({
-        queryKey: ['art_objects', search],
+        queryKey: ['search', search],
         queryFn: () => fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${search}`).then((response) => response.json() as Promise<ObjectIDListResponse>),
         placeholderData: keepPreviousData,
     })
@@ -26,7 +26,7 @@ export function Search() {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-    if (data.message == "Not Found") {
+    if (data.message == "Not Found") {  // errors seems to be sent as data.message ?
         return <div>Error: {data.message}</div>;
     }
     const data_found = data.total !== 0
@@ -43,7 +43,7 @@ export function Search() {
                 <ul>
                     <SearchObjectResult key={result} objectID={result} />
                 </ul>
-            )) : <h1>Nothing found</h1>}
+            )) : <h1>Aucun résultat trouvé. Essayez d'ajuster vos critères de recherche.</h1>}
         </div>
     </>
 

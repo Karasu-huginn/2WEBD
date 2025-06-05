@@ -37,7 +37,7 @@ export function SearchObjectResult(props: ResultDataProps) {
 
     const { objectID } = props
     const { isPending, error, data } = useQuery({
-        queryKey: ['objects', objectID],
+        queryKey: ['object', objectID],
         queryFn: () => fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`).then((response) => response.json() as Promise<ArtObject>),
     })
     if (isPending) {
