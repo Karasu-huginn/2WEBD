@@ -45,9 +45,11 @@ export function Search() {
                 setSearchParams({ search: e.target.value });
             }} />
         </form>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <div style={{ display: "table", gridTemplateColumns: "repeat(3, 1fr)" }}>
             {data_found ? results.map((result) => (
+            <ul>
                 <SearchObjectResult key={result} objectID={result} />
+            </ul>
             )) : <h1>Nothing found</h1>}
         </div>
     </>

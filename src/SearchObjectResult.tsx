@@ -1,4 +1,7 @@
+import './SearchObjectResult.css'
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
+
 
 export interface ArtObject {
     "objectID": number,
@@ -17,6 +20,13 @@ export interface ArtObject {
     "isTimelineWork": boolean,
     "message": string
     "measurements": [],
+    "primaryImageSmall": string,
+    "classification": string,
+    "medium": string,
+    "creditLine": string,
+    "artistNationality": string,
+    "primaryImage": string,
+    "artistDisplayName": string;
 }
 
 interface ResultDataProps {
@@ -39,6 +49,19 @@ export function SearchObjectResult(props: ResultDataProps) {
 
     // create card
     return <>
-        <h2>{data.title}</h2>
+        <div style={{ display: "inline-flex", backgroundColor: "grey", borderRadius: 10, width: "1043px"}}>
+            <div style={{ margin: 10}}>
+                {data.primaryImage && (
+                    <img src={data.primaryImage} alt={data.title} style={{ width: "250px", height: "176px", objectFit: "cover" }}/>
+                )}
+            </div>
+            <div style={{ display: "table", padding: 22}}>
+            <Link to={`/item/${objectID}`}>
+                <h2 style={{color: "white", textAlign: "start"}}>{data.title}</h2>
+            </Link>
+            <p style={{textAlign: "start"}}>{data.artistDisplayName} ({data.artistNationality})</p>
+            <p style={{textAlign: "start"}}>Date: {data.objectDate}</p>
+            </div>
+        </div>
     </>;
 }
