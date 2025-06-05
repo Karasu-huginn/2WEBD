@@ -12,10 +12,10 @@ export function ItemDetails() {
         queryFn: () => fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`).then((response) => response.json() as Promise<ArtObject>),
     })
     if (isPending) {
-        return; // set a return
+        return <div>Loading...</div>;
     }
     if (error) {
-        return; // set a return
+        return <div>Error: {error.message}</div>;
     }
 
     return (<div style={{ padding: "2rem", backgroundColor: "grey" }}>

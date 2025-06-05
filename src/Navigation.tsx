@@ -1,6 +1,4 @@
 import { Link } from "react-router";
-import { Search } from "./Search";
-//import { Search } from "./Search";
 
 export function Navigation() {
     return (

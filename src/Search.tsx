@@ -1,5 +1,4 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { SearchObjectResult } from './SearchObjectResult';
 import { useSearchParams } from "react-router";
 
@@ -30,14 +29,8 @@ export function Search() {
     if (data.message == "Not Found") {
         return <div>Error: {data.message}</div>;
     }
-    console.log(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${search}`)
-    console.log(data)
     const data_found = data.total !== 0
-    const results = data_found ? data.objectIDs.slice(0, 4) : [];
-
-    //const handleQuery = (e: React.FormEvent) => {
-    //setSearchParams({ search: e.target.value });
-    //}
+    const results = data_found ? data.objectIDs.slice(0, 10) : [];
 
     return <>
         <form>
@@ -47,9 +40,9 @@ export function Search() {
         </form>
         <div style={{ display: "table", gridTemplateColumns: "repeat(3, 1fr)" }}>
             {data_found ? results.map((result) => (
-            <ul>
-                <SearchObjectResult key={result} objectID={result} />
-            </ul>
+                <ul>
+                    <SearchObjectResult key={result} objectID={result} />
+                </ul>
             )) : <h1>Nothing found</h1>}
         </div>
     </>
