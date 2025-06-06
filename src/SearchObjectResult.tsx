@@ -81,7 +81,7 @@ export function SearchObjectResult(props: ResultDataProps & { viewMode?: "grid" 
                         ? { width: "96px", height: "96px" }
                         : { width: "100%", height: "200px" })
                 }}>
-                    No Picture
+                    Pas d'image
                 </div>
             )}
             <Link to={`/objects/${objectID}`}>
