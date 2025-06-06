@@ -21,8 +21,9 @@ export function AdvancedSearch() {
     const [dateEnd, setDateEnd] = useState("");
     const [departmentId, setDepartmentId] = useState("");
     const params = getSearchParams(search, dateBegin, dateEnd, departmentId);
+    console.log("v1/search" + params);
     const { isPending, error, data } = useQuery({
-        queryKey: ['search', search],
+        queryKey: ['adv_search', params],
         queryFn: () => fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search${params}`).then((response) => response.json() as Promise<ObjectIDListResponse>),
         placeholderData: keepPreviousData,
     })
