@@ -18,7 +18,7 @@ const router = createBrowserRouter([
           <Outlet />
         </main>
       </>
-      // add navbar & quick search
+      // quick search
     ),
     children: [
       {

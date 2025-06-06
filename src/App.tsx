@@ -16,7 +16,6 @@ function App() {
     return <div>Error: {error.message}</div>;
   }
   const results = data.objectIDs.slice(0, 100)
-  //console.log(results)
   return (
     <>
       {results.map((result) => (
@@ -27,6 +26,5 @@ function App() {
     </>
   )
 }
-//      <Search />
 
 export default App
