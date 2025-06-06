@@ -5,9 +5,9 @@ export function Navigation() {
     return (
         <div style={{ flexFlow: "row nowrap", justifyContent: "space-around", gap: "1rem" }}>
             <Search />
-            <nav>
+            <nav role="navigation">
                 <Link to="/">Main </Link>
-                <Link to="/adv_search">Advanced Search</Link>
+                <Link to="/advanced-search">Recherche avancée</Link>
             </nav>
         </div>
     )

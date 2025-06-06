@@ -55,7 +55,7 @@ export function SearchObjectResult(props: ResultDataProps) {
                 )}
             </div>
             <div style={{ display: "table", padding: 22 }}>
-                <Link to={`/item/${objectID}`}>
+                <Link to={`/objects/${objectID}`}>
                     <h2 style={{ color: "white", textAlign: "start" }}>{data.title}</h2>
                 </Link>
                 <p style={{ textAlign: "start" }}>{data.artistDisplayName} ({data.artistNationality})</p>

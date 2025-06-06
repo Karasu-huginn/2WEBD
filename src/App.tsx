@@ -18,6 +18,7 @@ function App() {
   const results = data.objectIDs.slice(0, 100)
   return (
     <>
+      <h1>Oeuvres en vedette</h1>
       {results.map((result) => (
         <ul>
           <HighlightedItem key={result} objectID={result} />

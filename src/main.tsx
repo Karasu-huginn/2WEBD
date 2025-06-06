@@ -25,11 +25,11 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/adv_search",
+        path: "/advanced-search",
         element: <AdvancedSearch />
       },
       {
-        path: "/item/:item_id",
+        path: "/objects/:item_id",
         element: <ItemDetails />
       }
     ]

@@ -32,11 +32,16 @@ export function Search() {
     const data_found = data.total !== 0
     const results = data_found ? data.objectIDs.slice(0, 10) : [];
 
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault()
+    }
+
     return <>
-        <form>
-            <input id="search" name="search" type="text" placeholder="Search for an object..." onChange={(e) => {
+        <form onSubmit={handleSearch}>
+            <input id="search" name="search" type="text" placeholder="Recherche rapide..." onChange={(e) => {
                 setSearchParams({ search: e.target.value });
             }} />
+            <button type="submit">Rechercher</button>
         </form>
         <div style={{ display: "table", gridTemplateColumns: "repeat(3, 1fr)" }}>
             {data_found ? results.map((result) => (
