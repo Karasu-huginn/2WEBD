@@ -7,18 +7,18 @@ import { AdvancedSearch } from './AdvancedSearch.tsx'
 import { ItemDetails } from './ItemDetails.tsx'
 import { Navigation } from './Navigation.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Footer } from './Footer.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <>
+      <div className="museum-container">
         <Navigation />
-        <main>
-          <Outlet />
-        </main>
-      </>
-      // add navbar & quick search
+        <Outlet />
+        <Footer />
+      </div>
+      // quick search
     ),
     children: [
       {
