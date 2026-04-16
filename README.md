@@ -1,54 +1,113 @@
-# React + TypeScript + Vite
+<!-- prettier-ignore -->
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ArtifactDB
 
-Currently, two official plugins are available:
+[![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![React](https://img.shields.io/badge/React_19-087ea4?style=flat-square&logo=react&logoColor=white)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
+[![Playwright](https://img.shields.io/badge/Playwright-2ead33?style=flat-square&logo=playwright&logoColor=white)](https://playwright.dev)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Explore the Metropolitan Museum of Art collection through an interactive, filter-rich interface.**
 
-## Expanding the ESLint configuration
+[Features](#features) | [Getting started](#getting-started) | [Project structure](#project-structure) | [Tech stack](#tech-stack)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+</div>
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+ArtifactDB is a React application that lets you browse, search, and filter through over 470,000 artifacts from [The Metropolitan Museum of Art Open Access API](https://metmuseum.github.io/). It provides a curated homepage with highlighted pieces, a universal search bar, and an advanced search page with filters for culture, date range, material, and department.
+
+## Features
+
+- **Highlighted artifacts** -- The homepage surfaces a curated selection of culturally significant items from the collection.
+- **Universal search** -- A persistent search bar available on every page for quick keyword lookups.
+- **Advanced filtering** -- Narrow results by culture/country, date range (3000 BCE -- 2000 CE), material, and department across 19 curatorial departments.
+- **Detailed artifact view** -- Each item page displays high-resolution imagery, artist info, dimensions, medium, classification, credit line, and a link to the Met's website.
+- **Grid & list views** -- Toggle between card grid and compact list layouts on the search results page.
+- **E2E tested** -- Playwright test suite covering homepage, search, advanced search, and item detail flows across Chromium, Firefox, and WebKit.
+
+## Getting started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [Git](https://git-scm.com/)
+
+### Installation
+
+```bash
+git clone https://github.com/Karasu-huginn/2WEBD.git
+cd 2WEBD
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+The app starts at **http://localhost:5173**.
+
+### Other scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run build` | Type-check and build for production |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+| `npx playwright test` | Run E2E tests |
+
+## Project structure
+
+```
+src/
+├── main.tsx                 # Entry point, router setup, React Query provider
+├── App.tsx                  # Homepage with highlighted artifacts
+├── Navigation.tsx           # Persistent navbar with integrated search
+├── Search.tsx               # Search logic and API types
+├── AdvancedSearch.tsx        # Multi-filter search page
+├── ItemDetails.tsx          # Single artifact detail view
+├── HighlightedItem.tsx      # Featured artifact card component
+├── SearchObjectResult.tsx   # Reusable result card (grid/list)
+└── assets/
+tests/
+├── homePage.spec.ts
+├── quickSearch.spec.ts
+├── advancedSearch.spec.ts
+├── itemDetail.spec.ts
+└── uiUxDesign.spec.ts
+```
+
+### Routes
+
+| Path | Page |
+|------|------|
+| `/` | Homepage with highlighted artifacts |
+| `/advanced-search` | Advanced search with filters |
+| `/objects/:item_id` | Artifact detail page |
+
+## Tech stack
+
+| Layer | Technology |
+|-------|-----------|
+| UI | React 19, Lucide React (icons) |
+| Routing | React Router 7 |
+| Data fetching | TanStack React Query |
+| Language | TypeScript 5.8 |
+| Build | Vite 6 with SWC |
+| Testing | Playwright |
+| API | [Met Museum Open Access API](https://metmuseum.github.io/) (no key required) |
+
+## API notes
+
+> [!NOTE]
+> The Met's public API does not expose an exhaustive list of materials. The advanced search includes a representative subset to demonstrate filtering capabilities.
+
+The app queries three endpoints from `collectionapi.metmuseum.org/public/collection/v1`:
+
+- **`/objects`** -- Full list of object IDs
+- **`/search`** -- Keyword and filtered search
+- **`/objects/{id}`** -- Individual artifact details
